@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Z⇌E Isomerization Pathways - Complete Presentation</title>
+    <title>Z⇌E Isomerization Pathways - 16:9 Presentation</title>
     <style>
         * {
             margin: 0;
@@ -14,20 +14,32 @@
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             background: #1a202c;
-            overflow-x: hidden;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         
         .presentation-container {
             position: relative;
-            width: 100%;
+            width: 100vw;
+            max-width: calc(100vh * 16 / 9);
             height: 100vh;
+            max-height: calc(100vw * 9 / 16);
             overflow: hidden;
+            background: #000;
+        }
+        
+        .presentation-container.fullscreen {
+            max-width: 100vw;
+            max-height: 100vh;
         }
         
         .slide {
             position: absolute;
             width: 100%;
-            height: 100vh;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -47,7 +59,7 @@
         
         /* Navigation */
         .nav-controls {
-            position: fixed;
+            position: absolute;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
@@ -103,6 +115,26 @@
             border-radius: 6px;
         }
         
+        /* Fullscreen button */
+        .fullscreen-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.95);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        
+        .fullscreen-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
         /* Title Slide */
         .title-slide {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -115,20 +147,20 @@
         }
         
         .main-title {
-            font-size: 64px;
+            font-size: 4.5rem;
             font-weight: bold;
             margin-bottom: 30px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .subtitle {
-            font-size: 28px;
+            font-size: 2rem;
             margin-bottom: 50px;
             opacity: 0.95;
         }
         
         .author-info {
-            font-size: 20px;
+            font-size: 1.4rem;
             margin-top: 40px;
             opacity: 0.9;
         }
@@ -142,86 +174,85 @@
             backdrop-filter: blur(10px);
         }
         
-        /* Slide 1 - Compound 1 */
+        /* Slide backgrounds */
         .slide1 {
             background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
         }
         
-        /* Slide 2 - Compound 2 */
         .slide2 {
             background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
         }
         
-        /* Slide 3 - Compound 5 */
         .slide3 {
             background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%);
         }
         
-        /* Slide 4 - Compound 6 */
         .slide4 {
             background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
         }
         
-        /* Summary Slide */
         .summary-slide {
             background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
         }
         
         .slide-container {
             width: 95%;
-            max-width: 1600px;
+            height: 90%;
             background: white;
             border-radius: 20px;
-            padding: 40px;
+            padding: 20px 30px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            max-height: 90vh;
-            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
         
         .slide-header {
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 25px;
+            padding-bottom: 10px;
             border-bottom: 4px solid currentColor;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
         }
         
         .compound-number {
             display: inline-block;
             background: currentColor;
             color: white;
-            width: 60px;
-            height: 60px;
-            line-height: 60px;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
             border-radius: 50%;
-            font-size: 32px;
+            font-size: 26px;
             font-weight: bold;
-            margin-bottom: 15px;
         }
         
         .slide-title {
-            font-size: 38px;
+            font-size: 2rem;
             font-weight: bold;
             color: #2d3748;
-            margin: 15px 0;
         }
         
         .slide-info {
-            font-size: 22px;
+            font-size: 1.2rem;
             font-weight: 600;
-            padding: 12px 25px;
+            padding: 8px 16px;
             border-radius: 10px;
             border: 2px solid currentColor;
-            display: inline-block;
             background: linear-gradient(to right, rgba(255,255,255,0.5), white);
         }
         
         .pathway-container {
             position: relative;
+            flex: 1;
             background: #fafbfc;
             border-radius: 15px;
-            padding: 30px;
-            margin-top: 30px;
-            min-height: 500px;
+            padding: 15px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .structure-box {
@@ -229,22 +260,15 @@
             background: white;
             border: 3px solid #cbd5e0;
             border-radius: 12px;
-            padding: 12px;
+            padding: 8px;
             box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            width: 130px;
             text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .structure-box:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-            z-index: 100;
+            z-index: 10;
         }
         
         .structure-img {
-            width: 110px;
-            height: 110px;
+            width: 90px;
+            height: 90px;
             display: block;
             margin: 0 auto;
             border-radius: 8px;
@@ -252,16 +276,16 @@
         }
         
         .structure-label {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
-            margin-top: 8px;
+            margin-top: 5px;
             color: #2d3748;
         }
         
         .energy-value {
-            font-size: 14px;
+            font-size: 12px;
             color: #718096;
-            margin-top: 4px;
+            margin-top: 2px;
             font-weight: 600;
         }
         
@@ -289,12 +313,12 @@
         }
         
         .footer-info {
-            margin-top: 25px;
-            padding: 15px;
+            margin-top: 10px;
+            padding: 10px;
             background: #f7fafc;
             border-radius: 10px;
             text-align: center;
-            font-size: 14px;
+            font-size: 0.95rem;
             color: #4a5568;
         }
         
@@ -308,20 +332,22 @@
         
         /* Summary Table */
         .summary-content {
-            padding: 30px;
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
         }
         
         .summary-title {
-            font-size: 42px;
+            font-size: 2.5rem;
             color: #2d3748;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 16px;
+            font-size: 0.95rem;
             background: white;
             border-radius: 10px;
             overflow: hidden;
@@ -331,13 +357,13 @@
         th {
             background: #4299e1;
             color: white;
-            padding: 15px;
+            padding: 12px;
             text-align: center;
             font-weight: 600;
         }
         
         td {
-            padding: 12px;
+            padding: 10px;
             text-align: center;
             border-bottom: 1px solid #e2e8f0;
         }
@@ -367,7 +393,7 @@
         
         /* Keyboard hint */
         .keyboard-hint {
-            position: fixed;
+            position: absolute;
             top: 20px;
             right: 20px;
             background: rgba(255,255,255,0.95);
@@ -386,10 +412,24 @@
             font-family: monospace;
             border: 1px solid #cbd5e0;
         }
+        
+        /* Proper subscript and superscript */
+        .subscript {
+            font-size: 0.7em;
+            vertical-align: sub;
+        }
+        
+        .superscript {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
     </style>
 </head>
 <body>
-    <div class="presentation-container">
+    <div class="presentation-container" id="presentationContainer">
+        <!-- Fullscreen button -->
+        <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶</button>
+        
         <!-- Keyboard hint -->
         <div class="keyboard-hint">
             Use <kbd>←</kbd> <kbd>→</kbd> or buttons to navigate
@@ -418,104 +458,93 @@
                 <div class="slide-header" style="color: #48bb78;">
                     <div class="compound-number">1</div>
                     <h2 class="slide-title">Compound 1: Z⇌E Isomerization</h2>
-                    <div class="slide-info" style="color: #22543d;">Z→E | t₁/₂ = 106.6 years | ΔG‡ = 30.44 kcal/mol</div>
+                    <div class="slide-info" style="color: #22543d;">Z→E | t<span class="subscript">1/2</span> = 106.6 years | ΔG<span class="superscript">‡</span> = 30.7 kcal/mol</div>
                 </div>
                 
                 <div class="pathway-container">
-                    <svg width="100%" height="450" viewBox="0 0 1300 450">
-                        <!-- Grid lines -->
-                        <line x1="80" y1="80" x2="1220" y2="80" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="130" x2="1220" y2="130" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="180" x2="1220" y2="180" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="230" x2="1220" y2="230" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="280" x2="1220" y2="280" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="330" x2="1220" y2="330" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        
-                        <!-- Axes -->
-                        <line x1="80" y1="30" x2="80" y2="380" stroke="#2d3748" stroke-width="3"/>
-                        <line x1="80" y1="380" x2="1220" y2="380" stroke="#2d3748" stroke-width="3"/>
-                        
-                        <!-- Y-axis labels -->
-                        <text x="55" y="35" font-size="14" text-anchor="end">60</text>
-                        <text x="55" y="85" font-size="14" text-anchor="end">50</text>
-                        <text x="55" y="135" font-size="14" text-anchor="end">40</text>
-                        <text x="55" y="185" font-size="14" text-anchor="end">30</text>
-                        <text x="55" y="235" font-size="14" text-anchor="end">20</text>
-                        <text x="55" y="285" font-size="14" text-anchor="end">10</text>
-                        <text x="55" y="335" font-size="14" text-anchor="end">0</text>
-                        <text x="55" y="385" font-size="14" text-anchor="end">-10</text>
-                        
-                        <text x="25" y="205" font-size="16" text-anchor="middle" transform="rotate(-90 25 205)">Energy (kcal/mol)</text>
-                        <text x="650" y="420" font-size="16" text-anchor="middle">Reaction Coordinate</text>
-                        
-                        <!-- Energy profile with straight lines -->
-                        <!-- Reactant baseline -->
-                        <line x1="130" y1="330" x2="300" y2="330" stroke="#2d3748" stroke-width="5"/>
-                        
-                        <!-- Reactant label on top -->
-                        <text x="215" y="315" font-size="16" font-weight="bold" text-anchor="middle">Reactants</text>
-                        <text x="215" y="300" font-size="14" text-anchor="middle">(1Z)</text>
-                        
-                        <!-- Inversion pathway (green) -->
-                        <line x1="300" y1="330" x2="500" y2="175" stroke="#48bb78" stroke-width="4"/>
-                        <line x1="500" y1="175" x2="600" y2="175" stroke="#48bb78" stroke-width="4"/>
-                        <line x1="600" y1="175" x2="800" y2="335" stroke="#48bb78" stroke-width="4"/>
-                        
-                        <!-- Rotation pathway (red) -->
-                        <line x1="300" y1="330" x2="450" y2="82" stroke="#f56565" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
-                        <line x1="450" y1="82" x2="650" y2="82" stroke="#f56565" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
-                        <line x1="650" y1="82" x2="800" y2="335" stroke="#f56565" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
-                        
-                        <!-- Product baseline -->
-                        <line x1="800" y1="335" x2="1170" y2="335" stroke="#2d3748" stroke-width="5"/>
-                        
-                        <!-- Product label on top -->
-                        <text x="985" y="320" font-size="16" font-weight="bold" text-anchor="middle">Products</text>
-                        <text x="985" y="305" font-size="14" text-anchor="middle">(1E)</text>
-                        
-                        <!-- Arrow markers -->
-                        <defs>
-                            <marker id="arrowgreen1" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#48bb78"/>
-                            </marker>
-                            <marker id="arrowred1" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#f56565"/>
-                            </marker>
-                        </defs>
-                        
-                        <!-- Arrows pointing to TSs -->
-                        <line x1="550" y1="145" x2="550" y2="165" stroke="#48bb78" stroke-width="2" marker-end="url(#arrowgreen1)"/>
-                        <text x="550" y="135" font-size="14" text-anchor="middle" fill="#48bb78" font-weight="bold">Inversion TS</text>
-                        
-                        <line x1="550" y1="52" x2="550" y2="72" stroke="#f56565" stroke-width="2" marker-end="url(#arrowred1)"/>
-                        <text x="550" y="42" font-size="14" text-anchor="middle" fill="#f56565" font-weight="bold">Rotation TS</text>
-                    </svg>
-                    </svg>
-                    
-                    <!-- Structure boxes -->
-                    <div class="structure-box stable-isomer" style="left: 120px; top: 340px; border-color: #48bb78;">
+                    <!-- Structure boxes positioned above the lines -->
+                    <div class="structure-box stable-isomer" style="left: 12%; top: 68%; border-color: #48bb78;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s1Z.jpg" class="structure-img" alt="1Z">
                         <div class="structure-label">1Z</div>
                         <div class="energy-value">0.0 kcal/mol</div>
                     </div>
                     
-                    <div class="structure-box ts-inv" style="left: 480px; top: 185px;">
+                    <div class="structure-box stable-isomer" style="right: 18%; top: 69%; border-color: #48bb78;">
+                        <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s1E.jpg" class="structure-img" alt="1E">
+                        <div class="structure-label">1E</div>
+                        <div class="energy-value">-1.47 kcal/mol</div>
+                    </div>
+                    
+                    <!-- TS structures positioned to the side with arrows -->
+                    <div class="structure-box ts-inv" style="left: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/1-in-ts.jpg" class="structure-img" alt="1-inv-ts">
                         <div class="structure-label">TS-Inv</div>
                         <div class="energy-value">30.44 kcal/mol</div>
                     </div>
                     
-                    <div class="structure-box ts-rot" style="left: 480px; top: 92px;">
+                    <div class="structure-box ts-rot" style="right: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/1-rot-ts.jpg" class="structure-img" alt="1-rot-ts">
                         <div class="structure-label">TS-Rot</div>
                         <div class="energy-value">51.16 kcal/mol</div>
                     </div>
                     
-                    <div class="structure-box stable-isomer" style="left: 880px; top: 345px; border-color: #48bb78;">
-                        <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s1E.jpg" class="structure-img" alt="1E">
-                        <div class="structure-label">1E</div>
-                        <div class="energy-value">-1.47 kcal/mol</div>
-                    </div>
+                    <svg width="100%" height="100%" viewBox="0 0 1000 600" style="position: absolute; top: 0; left: 0;">
+                        <!-- Arrows from TS boxes to peaks -->
+                        <defs>
+                            <marker id="arrowhead1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#48bb78" />
+                            </marker>
+                            <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#f56565" />
+                            </marker>
+                        </defs>
+                        
+                        <!-- Arrow from Inv TS to peak -->
+                        <path d="M 400 100 Q 420 220 440 275" stroke="#48bb78" stroke-width="2" fill="none" marker-end="url(#arrowhead1)"/>
+                        
+                        <!-- Arrow from Rot TS to peak -->
+                        <path d="M 600 100 Q 580 160 560 185" stroke="#f56565" stroke-width="2" fill="none" marker-end="url(#arrowhead2)"/>
+                        
+                        <!-- Energy profile with 1.5x bigger y-axis spacing -->
+                        <!-- Grid lines -->
+                        <line x1="100" y1="120" x2="900" y2="120" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="210" x2="900" y2="210" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="300" x2="900" y2="300" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="390" x2="900" y2="390" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="480" x2="900" y2="480" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        
+                        <!-- Axes -->
+                        <line x1="100" y1="60" x2="100" y2="540" stroke="#2d3748" stroke-width="2"/>
+                        <line x1="100" y1="540" x2="900" y2="540" stroke="#2d3748" stroke-width="2"/>
+                        
+                        <!-- Y-axis labels -->
+                        <text x="80" y="65" font-size="12" text-anchor="end">60</text>
+                        <text x="80" y="125" font-size="12" text-anchor="end">50</text>
+                        <text x="80" y="215" font-size="12" text-anchor="end">40</text>
+                        <text x="80" y="305" font-size="12" text-anchor="end">30</text>
+                        <text x="80" y="395" font-size="12" text-anchor="end">20</text>
+                        <text x="80" y="485" font-size="12" text-anchor="end">10</text>
+                        <text x="80" y="545" font-size="12" text-anchor="end">0</text>
+                        
+                        <text x="50" y="300" font-size="14" text-anchor="middle" transform="rotate(-90 50 300)">Energy (kcal/mol)</text>
+                        <text x="500" y="575" font-size="14" text-anchor="middle">Reaction Coordinate</text>
+                        
+                        <!-- Reactant baseline at 0 kcal/mol -->
+                        <line x1="150" y1="480" x2="250" y2="480" stroke="#2d3748" stroke-width="4"/>
+                        
+                        <!-- Inversion pathway (green) - 30.44 kcal/mol barrier -->
+                        <line x1="250" y1="480" x2="450" y2="275" stroke="#48bb78" stroke-width="3"/>
+                        <line x1="450" y1="275" x2="550" y2="275" stroke="#48bb78" stroke-width="3"/>
+                        <line x1="550" y1="275" x2="750" y2="489" stroke="#48bb78" stroke-width="3"/>
+                        
+                        <!-- Rotation pathway (red, dashed) - 51.16 kcal/mol barrier -->
+                        <line x1="250" y1="480" x2="450" y2="185" stroke="#f56565" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+                        <line x1="450" y1="185" x2="550" y2="185" stroke="#f56565" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+                        <line x1="550" y1="185" x2="750" y2="489" stroke="#f56565" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+                        
+                        <!-- Product baseline at -1.47 kcal/mol -->
+                        <line x1="750" y1="489" x2="850" y2="489" stroke="#2d3748" stroke-width="4"/>
+                    </svg>
                 </div>
                 
                 <div class="footer-info">
@@ -530,107 +559,97 @@
                 <div class="slide-header" style="color: #4299e1;">
                     <div class="compound-number">2</div>
                     <h2 class="slide-title">Compound 2: Z⇌E Isomerization</h2>
-                    <div class="slide-info" style="color: #2b6cb0;">Z→E | t₁/₂ = 33.2 hours | ΔG‡ = 29.77 kcal/mol</div>
+                    <div class="slide-info" style="color: #2b6cb0;">Z→E | t<span class="subscript">1/2</span> = 33.2 hours | ΔG<span class="superscript">‡</span> = 25.4 kcal/mol</div>
                 </div>
                 
                 <div class="pathway-container">
-                    <svg width="100%" height="450" viewBox="0 0 1300 450">
-                        <!-- Grid lines -->
-                        <line x1="80" y1="80" x2="1220" y2="80" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="130" x2="1220" y2="130" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="180" x2="1220" y2="180" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="230" x2="1220" y2="230" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="280" x2="1220" y2="280" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="330" x2="1220" y2="330" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        
-                        <!-- Axes -->
-                        <line x1="80" y1="30" x2="80" y2="380" stroke="#2d3748" stroke-width="3"/>
-                        <line x1="80" y1="380" x2="1220" y2="380" stroke="#2d3748" stroke-width="3"/>
-                        
-                        <!-- Y-axis labels -->
-                        <text x="55" y="35" font-size="14" text-anchor="end">60</text>
-                        <text x="55" y="85" font-size="14" text-anchor="end">50</text>
-                        <text x="55" y="135" font-size="14" text-anchor="end">40</text>
-                        <text x="55" y="185" font-size="14" text-anchor="end">30</text>
-                        <text x="55" y="235" font-size="14" text-anchor="end">20</text>
-                        <text x="55" y="285" font-size="14" text-anchor="end">10</text>
-                        <text x="55" y="335" font-size="14" text-anchor="end">0</text>
-                        <text x="55" y="385" font-size="14" text-anchor="end">-10</text>
-                        
-                        <text x="25" y="205" font-size="16" text-anchor="middle" transform="rotate(-90 25 205)">Energy (kcal/mol)</text>
-                        <text x="650" y="420" font-size="16" text-anchor="middle">Reaction Coordinate</text>
-                        
-                        <!-- Energy profile with straight lines -->
-                        <!-- Reactant baseline -->
-                        <line x1="130" y1="330" x2="300" y2="330" stroke="#2d3748" stroke-width="5"/>
-                        
-                        <!-- Reactant label on top -->
-                        <text x="215" y="315" font-size="16" font-weight="bold" text-anchor="middle">Reactants</text>
-                        <text x="215" y="300" font-size="14" text-anchor="middle">(2Z)</text>
-                        
-                        <!-- Inversion pathway (green) -->
-                        <line x1="300" y1="330" x2="500" y2="178" stroke="#48bb78" stroke-width="4"/>
-                        <line x1="500" y1="178" x2="600" y2="178" stroke="#48bb78" stroke-width="4"/>
-                        <line x1="600" y1="178" x2="800" y2="312" stroke="#48bb78" stroke-width="4"/>
-                        
-                        <!-- Rotation pathway (red) -->
-                        <line x1="300" y1="330" x2="450" y2="70" stroke="#f56565" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
-                        <line x1="450" y1="70" x2="650" y2="70" stroke="#f56565" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
-                        <line x1="650" y1="70" x2="800" y2="312" stroke="#f56565" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
-                        
-                        <!-- Product baseline -->
-                        <line x1="800" y1="312" x2="1170" y2="312" stroke="#2d3748" stroke-width="5"/>
-                        
-                        <!-- Product label on top -->
-                        <text x="985" y="297" font-size="16" font-weight="bold" text-anchor="middle">Products</text>
-                        <text x="985" y="282" font-size="14" text-anchor="middle">(2E)</text>
-                        
-                        <!-- Arrow markers -->
-                        <defs>
-                            <marker id="arrowgreen2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#48bb78"/>
-                            </marker>
-                            <marker id="arrowred2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#f56565"/>
-                            </marker>
-                        </defs>
-                        
-                        <!-- Arrows pointing to TSs -->
-                        <line x1="550" y1="148" x2="550" y2="168" stroke="#48bb78" stroke-width="2" marker-end="url(#arrowgreen2)"/>
-                        <text x="550" y="138" font-size="14" text-anchor="middle" fill="#48bb78" font-weight="bold">Inversion TS</text>
-                        
-                        <line x1="550" y1="40" x2="550" y2="60" stroke="#f56565" stroke-width="2" marker-end="url(#arrowred2)"/>
-                        <text x="550" y="30" font-size="14" text-anchor="middle" fill="#f56565" font-weight="bold">Rotation TS</text>
-                    </svg>
-                    
-                    <!-- Structure boxes -->
-                    <div class="structure-box stable-isomer" style="left: 120px; top: 340px; border-color: #4299e1;">
+                    <!-- Structure boxes positioned above the lines -->
+                    <div class="structure-box stable-isomer" style="left: 12%; top: 68%; border-color: #4299e1;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s2Z.jpg" class="structure-img" alt="2Z">
                         <div class="structure-label">2Z</div>
                         <div class="energy-value">0.0 kcal/mol</div>
                     </div>
                     
-                    <div class="structure-box ts-inv" style="left: 480px; top: 188px;">
+                    <div class="structure-box stable-isomer" style="right: 18%; top: 64%; border-color: #4299e1;">
+                        <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s2E.jpg" class="structure-img" alt="2E">
+                        <div class="structure-label">2E</div>
+                        <div class="energy-value">4.18 kcal/mol</div>
+                    </div>
+                    
+                    <!-- TS structures positioned to the side with arrows -->
+                    <div class="structure-box ts-inv" style="left: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/2-in-ts.jpg" class="structure-img" alt="2-inv-ts">
                         <div class="structure-label">TS-Inv</div>
                         <div class="energy-value">29.77 kcal/mol</div>
                     </div>
                     
-                    <div class="structure-box ts-rot" style="left: 480px; top: 80px;">
+                    <div class="structure-box ts-rot" style="right: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/2-rot-ts.jpg" class="structure-img" alt="2-rot-ts">
                         <div class="structure-label">TS-Rot</div>
                         <div class="energy-value">55.08 kcal/mol</div>
                     </div>
                     
-                    <div class="structure-box stable-isomer" style="left: 880px; top: 322px; border-color: #4299e1;">
-                        <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s2E.jpg" class="structure-img" alt="2E">
-                        <div class="structure-label">2E</div>
-                        <div class="energy-value">4.18 kcal/mol</div>
-                    </div>
+                    <svg width="100%" height="100%" viewBox="0 0 1000 600" style="position: absolute; top: 0; left: 0;">
+                        <!-- Arrows from TS boxes to peaks -->
+                        <defs>
+                            <marker id="arrowhead3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#48bb78" />
+                            </marker>
+                            <marker id="arrowhead4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#f56565" />
+                            </marker>
+                        </defs>
+                        
+                        <!-- Arrow from Inv TS to peak -->
+                        <path d="M 400 100 Q 420 220 440 279" stroke="#48bb78" stroke-width="2" fill="none" marker-end="url(#arrowhead3)"/>
+                        
+                        <!-- Arrow from Rot TS to peak -->
+                        <path d="M 600 100 Q 580 140 560 149" stroke="#f56565" stroke-width="2" fill="none" marker-end="url(#arrowhead4)"/>
+                        
+                        <!-- Energy profile with 1.5x bigger y-axis spacing -->
+                        <!-- Grid lines -->
+                        <line x1="100" y1="120" x2="900" y2="120" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="210" x2="900" y2="210" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="300" x2="900" y2="300" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="390" x2="900" y2="390" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="480" x2="900" y2="480" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        
+                        <!-- Axes -->
+                        <line x1="100" y1="60" x2="100" y2="540" stroke="#2d3748" stroke-width="2"/>
+                        <line x1="100" y1="540" x2="900" y2="540" stroke="#2d3748" stroke-width="2"/>
+                        
+                        <!-- Y-axis labels -->
+                        <text x="80" y="65" font-size="12" text-anchor="end">60</text>
+                        <text x="80" y="125" font-size="12" text-anchor="end">50</text>
+                        <text x="80" y="215" font-size="12" text-anchor="end">40</text>
+                        <text x="80" y="305" font-size="12" text-anchor="end">30</text>
+                        <text x="80" y="395" font-size="12" text-anchor="end">20</text>
+                        <text x="80" y="485" font-size="12" text-anchor="end">10</text>
+                        <text x="80" y="545" font-size="12" text-anchor="end">0</text>
+                        
+                        <text x="50" y="300" font-size="14" text-anchor="middle" transform="rotate(-90 50 300)">Energy (kcal/mol)</text>
+                        <text x="500" y="575" font-size="14" text-anchor="middle">Reaction Coordinate</text>
+                        
+                        <!-- Reactant baseline at 0 kcal/mol -->
+                        <line x1="150" y1="480" x2="250" y2="480" stroke="#2d3748" stroke-width="4"/>
+                        
+                        <!-- Inversion pathway (green) - 29.77 kcal/mol barrier -->
+                        <line x1="250" y1="480" x2="450" y2="279" stroke="#48bb78" stroke-width="3"/>
+                        <line x1="450" y1="279" x2="550" y2="279" stroke="#48bb78" stroke-width="3"/>
+                        <line x1="550" y1="279" x2="750" y2="455" stroke="#48bb78" stroke-width="3"/>
+                        
+                        <!-- Rotation pathway (red, dashed) - 55.08 kcal/mol barrier -->
+                        <line x1="250" y1="480" x2="450" y2="149" stroke="#f56565" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+                        <line x1="450" y1="149" x2="550" y2="149" stroke="#f56565" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+                        <line x1="550" y1="149" x2="750" y2="455" stroke="#f56565" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+                        
+                        <!-- Product baseline at 4.18 kcal/mol -->
+                        <line x1="750" y1="455" x2="850" y2="455" stroke="#2d3748" stroke-width="4"/>
+                    </svg>
                 </div>
                 
                 <div class="footer-info">
-                    <p><strong>Key Finding:</strong> Faster isomerization with t₁/₂ = <span class="key-point" style="background: #4299e1;">33.2 hours</span>. Methyl substituent reduces barrier.</p>
+                    <p><strong>Key Finding:</strong> Faster isomerization with t<span class="subscript">1/2</span> = <span class="key-point" style="background: #4299e1;">33.2 hours</span>. Methyl substituent reduces barrier.</p>
                 </div>
             </div>
         </div>
@@ -641,107 +660,97 @@
                 <div class="slide-header" style="color: #9f7aea;">
                     <div class="compound-number">5</div>
                     <h2 class="slide-title">Compound 5: E⇌Z Isomerization</h2>
-                    <div class="slide-info" style="color: #553c9a;">E→Z | t₁/₂ = 59.5 s | ΔG‡ = 24.50 kcal/mol</div>
+                    <div class="slide-info" style="color: #553c9a;">E→Z | t<span class="subscript">1/2</span> = 59.5 s | ΔG<span class="superscript">‡</span> = 21.0 kcal/mol</div>
                 </div>
                 
                 <div class="pathway-container">
-                    <svg width="100%" height="450" viewBox="0 0 1300 450">
-                        <!-- Grid lines -->
-                        <line x1="80" y1="80" x2="1220" y2="80" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="130" x2="1220" y2="130" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="180" x2="1220" y2="180" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="230" x2="1220" y2="230" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="280" x2="1220" y2="280" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="330" x2="1220" y2="330" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        
-                        <!-- Axes -->
-                        <line x1="80" y1="30" x2="80" y2="380" stroke="#2d3748" stroke-width="3"/>
-                        <line x1="80" y1="380" x2="1220" y2="380" stroke="#2d3748" stroke-width="3"/>
-                        
-                        <!-- Y-axis labels -->
-                        <text x="55" y="35" font-size="14" text-anchor="end">60</text>
-                        <text x="55" y="85" font-size="14" text-anchor="end">50</text>
-                        <text x="55" y="135" font-size="14" text-anchor="end">40</text>
-                        <text x="55" y="185" font-size="14" text-anchor="end">30</text>
-                        <text x="55" y="235" font-size="14" text-anchor="end">20</text>
-                        <text x="55" y="285" font-size="14" text-anchor="end">10</text>
-                        <text x="55" y="335" font-size="14" text-anchor="end">0</text>
-                        <text x="55" y="385" font-size="14" text-anchor="end">-10</text>
-                        
-                        <text x="25" y="205" font-size="16" text-anchor="middle" transform="rotate(-90 25 205)">Energy (kcal/mol)</text>
-                        <text x="650" y="420" font-size="16" text-anchor="middle">Reaction Coordinate (E→Z)</text>
-                        
-                        <!-- Energy profile with straight lines -->
-                        <!-- Reactant baseline -->
-                        <line x1="130" y1="330" x2="300" y2="330" stroke="#2d3748" stroke-width="5"/>
-                        
-                        <!-- Reactant label on top -->
-                        <text x="215" y="315" font-size="16" font-weight="bold" text-anchor="middle">Reactants</text>
-                        <text x="215" y="300" font-size="14" text-anchor="middle">(5E)</text>
-                        
-                        <!-- Inversion pathway (green) -->
-                        <line x1="300" y1="330" x2="500" y2="207" stroke="#48bb78" stroke-width="4"/>
-                        <line x1="500" y1="207" x2="600" y2="207" stroke="#48bb78" stroke-width="4"/>
-                        <line x1="600" y1="207" x2="800" y2="280" stroke="#48bb78" stroke-width="4"/>
-                        
-                        <!-- Rotation pathway (red) -->
-                        <line x1="300" y1="330" x2="450" y2="149" stroke="#f56565" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
-                        <line x1="450" y1="149" x2="650" y2="149" stroke="#f56565" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
-                        <line x1="650" y1="149" x2="800" y2="280" stroke="#f56565" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
-                        
-                        <!-- Product baseline -->
-                        <line x1="800" y1="280" x2="1170" y2="280" stroke="#2d3748" stroke-width="5"/>
-                        
-                        <!-- Product label on top -->
-                        <text x="985" y="265" font-size="16" font-weight="bold" text-anchor="middle">Products</text>
-                        <text x="985" y="250" font-size="14" text-anchor="middle">(5Z)</text>
-                        
-                        <!-- Arrow markers -->
-                        <defs>
-                            <marker id="arrowgreen5" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#48bb78"/>
-                            </marker>
-                            <marker id="arrowred5" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#f56565"/>
-                            </marker>
-                        </defs>
-                        
-                        <!-- Arrows pointing to TSs -->
-                        <line x1="550" y1="177" x2="550" y2="197" stroke="#48bb78" stroke-width="2" marker-end="url(#arrowgreen5)"/>
-                        <text x="550" y="167" font-size="14" text-anchor="middle" fill="#48bb78" font-weight="bold">Inversion TS</text>
-                        
-                        <line x1="550" y1="119" x2="550" y2="139" stroke="#f56565" stroke-width="2" marker-end="url(#arrowred5)"/>
-                        <text x="550" y="109" font-size="14" text-anchor="middle" fill="#f56565" font-weight="bold">Rotation TS</text>
-                    </svg>
-                    
-                    <!-- Structure boxes -->
-                    <div class="structure-box stable-isomer" style="left: 120px; top: 340px; border-color: #9f7aea;">
+                    <!-- Structure boxes positioned above the lines -->
+                    <div class="structure-box stable-isomer" style="left: 12%; top: 68%; border-color: #9f7aea;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s5E.jpg" class="structure-img" alt="5E">
                         <div class="structure-label">5E</div>
                         <div class="energy-value">0.0 kcal/mol</div>
                     </div>
                     
-                    <div class="structure-box ts-inv" style="left: 480px; top: 217px;">
+                    <div class="structure-box stable-isomer" style="right: 18%; top: 58%; border-color: #9f7aea;">
+                        <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s5Z.jpg" class="structure-img" alt="5Z">
+                        <div class="structure-label">5Z</div>
+                        <div class="energy-value">10.09 kcal/mol</div>
+                    </div>
+                    
+                    <!-- TS structures positioned to the side with arrows -->
+                    <div class="structure-box ts-inv" style="left: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/5-in-ts.jpg" class="structure-img" alt="5-inv-ts">
                         <div class="structure-label">TS-Inv</div>
                         <div class="energy-value">24.50 kcal/mol</div>
                     </div>
                     
-                    <div class="structure-box ts-rot" style="left: 480px; top: 159px;">
+                    <div class="structure-box ts-rot" style="right: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/5-rot-ts.jpg" class="structure-img" alt="5-rot-ts">
                         <div class="structure-label">TS-Rot</div>
                         <div class="energy-value">36.27 kcal/mol</div>
                     </div>
                     
-                    <div class="structure-box stable-isomer" style="left: 880px; top: 290px; border-color: #9f7aea;">
-                        <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s5Z.jpg" class="structure-img" alt="5Z">
-                        <div class="structure-label">5Z</div>
-                        <div class="energy-value">10.09 kcal/mol</div>
-                    </div>
+                    <svg width="100%" height="100%" viewBox="0 0 1000 600" style="position: absolute; top: 0; left: 0;">
+                        <!-- Arrows from TS boxes to peaks -->
+                        <defs>
+                            <marker id="arrowhead5" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#48bb78" />
+                            </marker>
+                            <marker id="arrowhead6" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#f56565" />
+                            </marker>
+                        </defs>
+                        
+                        <!-- Arrow from Inv TS to peak -->
+                        <path d="M 400 100 Q 420 250 440 303" stroke="#48bb78" stroke-width="2" fill="none" marker-end="url(#arrowhead5)"/>
+                        
+                        <!-- Arrow from Rot TS to peak -->
+                        <path d="M 600 100 Q 580 200 560 234" stroke="#f56565" stroke-width="2" fill="none" marker-end="url(#arrowhead6)"/>
+                        
+                        <!-- Energy profile with 1.5x bigger y-axis spacing -->
+                        <!-- Grid lines -->
+                        <line x1="100" y1="120" x2="900" y2="120" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="210" x2="900" y2="210" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="300" x2="900" y2="300" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="390" x2="900" y2="390" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="480" x2="900" y2="480" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        
+                        <!-- Axes -->
+                        <line x1="100" y1="60" x2="100" y2="540" stroke="#2d3748" stroke-width="2"/>
+                        <line x1="100" y1="540" x2="900" y2="540" stroke="#2d3748" stroke-width="2"/>
+                        
+                        <!-- Y-axis labels -->
+                        <text x="80" y="65" font-size="12" text-anchor="end">60</text>
+                        <text x="80" y="125" font-size="12" text-anchor="end">50</text>
+                        <text x="80" y="215" font-size="12" text-anchor="end">40</text>
+                        <text x="80" y="305" font-size="12" text-anchor="end">30</text>
+                        <text x="80" y="395" font-size="12" text-anchor="end">20</text>
+                        <text x="80" y="485" font-size="12" text-anchor="end">10</text>
+                        <text x="80" y="545" font-size="12" text-anchor="end">0</text>
+                        
+                        <text x="50" y="300" font-size="14" text-anchor="middle" transform="rotate(-90 50 300)">Energy (kcal/mol)</text>
+                        <text x="500" y="575" font-size="14" text-anchor="middle">Reaction Coordinate (E→Z)</text>
+                        
+                        <!-- Reactant baseline at 0 kcal/mol -->
+                        <line x1="150" y1="480" x2="250" y2="480" stroke="#2d3748" stroke-width="4"/>
+                        
+                        <!-- Inversion pathway (green) - 24.50 kcal/mol barrier -->
+                        <line x1="250" y1="480" x2="450" y2="303" stroke="#48bb78" stroke-width="3"/>
+                        <line x1="450" y1="303" x2="550" y2="303" stroke="#48bb78" stroke-width="3"/>
+                        <line x1="550" y1="303" x2="750" y2="416" stroke="#48bb78" stroke-width="3"/>
+                        
+                        <!-- Rotation pathway (red, dashed) - 36.27 kcal/mol barrier -->
+                        <line x1="250" y1="480" x2="450" y2="234" stroke="#f56565" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+                        <line x1="450" y1="234" x2="550" y2="234" stroke="#f56565" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+                        <line x1="550" y1="234" x2="750" y2="416" stroke="#f56565" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+                        
+                        <!-- Product baseline at 10.09 kcal/mol -->
+                        <line x1="750" y1="416" x2="850" y2="416" stroke="#2d3748" stroke-width="4"/>
+                    </svg>
                 </div>
                 
                 <div class="footer-info">
-                    <p><strong>Key Finding:</strong> Rapid E→Z isomerization with t₁/₂ = <span class="key-point" style="background: #9f7aea;">59.5 seconds</span>. Lowest inversion barrier.</p>
+                    <p><strong>Key Finding:</strong> Rapid E→Z isomerization with t<span class="subscript">1/2</span> = <span class="key-point" style="background: #9f7aea;">59.5 seconds</span>. Lowest inversion barrier.</p>
                 </div>
             </div>
         </div>
@@ -752,107 +761,97 @@
                 <div class="slide-header" style="color: #ed8936;">
                     <div class="compound-number">6</div>
                     <h2 class="slide-title">Compound 6: E⇌Z Isomerization</h2>
-                    <div class="slide-info" style="color: #c05621;">E→Z | t₁/₂ = 3.4 s | ΔG‡ = 28.69 kcal/mol</div>
+                    <div class="slide-info" style="color: #c05621;">E→Z | t<span class="subscript">1/2</span> = 3.4 s | ΔG<span class="superscript">‡</span> = 19.3 kcal/mol</div>
                 </div>
                 
                 <div class="pathway-container">
-                    <svg width="100%" height="450" viewBox="0 0 1300 450">
-                        <!-- Grid lines -->
-                        <line x1="80" y1="80" x2="1220" y2="80" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="130" x2="1220" y2="130" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="180" x2="1220" y2="180" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="230" x2="1220" y2="230" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="280" x2="1220" y2="280" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        <line x1="80" y1="330" x2="1220" y2="330" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
-                        
-                        <!-- Axes -->
-                        <line x1="80" y1="30" x2="80" y2="380" stroke="#2d3748" stroke-width="3"/>
-                        <line x1="80" y1="380" x2="1220" y2="380" stroke="#2d3748" stroke-width="3"/>
-                        
-                        <!-- Y-axis labels -->
-                        <text x="55" y="35" font-size="14" text-anchor="end">60</text>
-                        <text x="55" y="85" font-size="14" text-anchor="end">50</text>
-                        <text x="55" y="135" font-size="14" text-anchor="end">40</text>
-                        <text x="55" y="185" font-size="14" text-anchor="end">30</text>
-                        <text x="55" y="235" font-size="14" text-anchor="end">20</text>
-                        <text x="55" y="285" font-size="14" text-anchor="end">10</text>
-                        <text x="55" y="335" font-size="14" text-anchor="end">0</text>
-                        <text x="55" y="385" font-size="14" text-anchor="end">-10</text>
-                        
-                        <text x="25" y="205" font-size="16" text-anchor="middle" transform="rotate(-90 25 205)">Energy (kcal/mol)</text>
-                        <text x="650" y="420" font-size="16" text-anchor="middle">Reaction Coordinate (E→Z)</text>
-                        
-                        <!-- Energy profile with straight lines -->
-                        <!-- Reactant baseline -->
-                        <line x1="130" y1="330" x2="300" y2="330" stroke="#2d3748" stroke-width="5"/>
-                        
-                        <!-- Reactant label on top -->
-                        <text x="215" y="315" font-size="16" font-weight="bold" text-anchor="middle">Reactants</text>
-                        <text x="215" y="300" font-size="14" text-anchor="middle">(6E)</text>
-                        
-                        <!-- Inversion pathway (green) -->
-                        <line x1="300" y1="330" x2="500" y2="181" stroke="#48bb78" stroke-width="4"/>
-                        <line x1="500" y1="181" x2="600" y2="181" stroke="#48bb78" stroke-width="4"/>
-                        <line x1="600" y1="181" x2="800" y2="288" stroke="#48bb78" stroke-width="4"/>
-                        
-                        <!-- Rotation pathway (red) -->
-                        <line x1="300" y1="330" x2="450" y2="143" stroke="#f56565" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
-                        <line x1="450" y1="143" x2="650" y2="143" stroke="#f56565" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
-                        <line x1="650" y1="143" x2="800" y2="288" stroke="#f56565" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
-                        
-                        <!-- Product baseline -->
-                        <line x1="800" y1="288" x2="1170" y2="288" stroke="#2d3748" stroke-width="5"/>
-                        
-                        <!-- Product label on top -->
-                        <text x="985" y="273" font-size="16" font-weight="bold" text-anchor="middle">Products</text>
-                        <text x="985" y="258" font-size="14" text-anchor="middle">(6Z)</text>
-                        
-                        <!-- Arrow markers -->
-                        <defs>
-                            <marker id="arrowgreen6" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#48bb78"/>
-                            </marker>
-                            <marker id="arrowred6" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#f56565"/>
-                            </marker>
-                        </defs>
-                        
-                        <!-- Arrows pointing to TSs -->
-                        <line x1="550" y1="151" x2="550" y2="171" stroke="#48bb78" stroke-width="2" marker-end="url(#arrowgreen6)"/>
-                        <text x="550" y="141" font-size="14" text-anchor="middle" fill="#48bb78" font-weight="bold">Inversion TS</text>
-                        
-                        <line x1="550" y1="113" x2="550" y2="133" stroke="#f56565" stroke-width="2" marker-end="url(#arrowred6)"/>
-                        <text x="550" y="103" font-size="14" text-anchor="middle" fill="#f56565" font-weight="bold">Rotation TS</text>
-                    </svg>
-                    
-                    <!-- Structure boxes -->
-                    <div class="structure-box stable-isomer" style="left: 120px; top: 340px; border-color: #ed8936;">
+                    <!-- Structure boxes positioned above the lines -->
+                    <div class="structure-box stable-isomer" style="left: 12%; top: 68%; border-color: #ed8936;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s6E.jpg" class="structure-img" alt="6E">
                         <div class="structure-label">6E</div>
                         <div class="energy-value">0.0 kcal/mol</div>
                     </div>
                     
-                    <div class="structure-box ts-inv" style="left: 480px; top: 191px;">
+                    <div class="structure-box stable-isomer" style="right: 18%; top: 61%; border-color: #ed8936;">
+                        <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s6Z.jpg" class="structure-img" alt="6Z">
+                        <div class="structure-label">6Z</div>
+                        <div class="energy-value">7.60 kcal/mol</div>
+                    </div>
+                    
+                    <!-- TS structures positioned to the side with arrows -->
+                    <div class="structure-box ts-inv" style="left: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/6-in-ts.jpg" class="structure-img" alt="6-inv-ts">
                         <div class="structure-label">TS-Inv</div>
                         <div class="energy-value">28.69 kcal/mol</div>
                     </div>
                     
-                    <div class="structure-box ts-rot" style="left: 480px; top: 153px;">
+                    <div class="structure-box ts-rot" style="right: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/6-rot-ts.jpg" class="structure-img" alt="6-rot-ts">
                         <div class="structure-label">TS-Rot</div>
                         <div class="energy-value">37.45 kcal/mol</div>
                     </div>
                     
-                    <div class="structure-box stable-isomer" style="left: 880px; top: 298px; border-color: #ed8936;">
-                        <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s6Z.jpg" class="structure-img" alt="6Z">
-                        <div class="structure-label">6Z</div>
-                        <div class="energy-value">7.60 kcal/mol</div>
-                    </div>
+                    <svg width="100%" height="100%" viewBox="0 0 1000 600" style="position: absolute; top: 0; left: 0;">
+                        <!-- Arrows from TS boxes to peaks -->
+                        <defs>
+                            <marker id="arrowhead7" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#48bb78" />
+                            </marker>
+                            <marker id="arrowhead8" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#f56565" />
+                            </marker>
+                        </defs>
+                        
+                        <!-- Arrow from Inv TS to peak -->
+                        <path d="M 400 100 Q 420 220 440 273" stroke="#48bb78" stroke-width="2" fill="none" marker-end="url(#arrowhead7)"/>
+                        
+                        <!-- Arrow from Rot TS to peak -->
+                        <path d="M 600 100 Q 580 190 560 225" stroke="#f56565" stroke-width="2" fill="none" marker-end="url(#arrowhead8)"/>
+                        
+                        <!-- Energy profile with 1.5x bigger y-axis spacing -->
+                        <!-- Grid lines -->
+                        <line x1="100" y1="120" x2="900" y2="120" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="210" x2="900" y2="210" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="300" x2="900" y2="300" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="390" x2="900" y2="390" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="100" y1="480" x2="900" y2="480" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5,5"/>
+                        
+                        <!-- Axes -->
+                        <line x1="100" y1="60" x2="100" y2="540" stroke="#2d3748" stroke-width="2"/>
+                        <line x1="100" y1="540" x2="900" y2="540" stroke="#2d3748" stroke-width="2"/>
+                        
+                        <!-- Y-axis labels -->
+                        <text x="80" y="65" font-size="12" text-anchor="end">60</text>
+                        <text x="80" y="125" font-size="12" text-anchor="end">50</text>
+                        <text x="80" y="215" font-size="12" text-anchor="end">40</text>
+                        <text x="80" y="305" font-size="12" text-anchor="end">30</text>
+                        <text x="80" y="395" font-size="12" text-anchor="end">20</text>
+                        <text x="80" y="485" font-size="12" text-anchor="end">10</text>
+                        <text x="80" y="545" font-size="12" text-anchor="end">0</text>
+                        
+                        <text x="50" y="300" font-size="14" text-anchor="middle" transform="rotate(-90 50 300)">Energy (kcal/mol)</text>
+                        <text x="500" y="575" font-size="14" text-anchor="middle">Reaction Coordinate (E→Z)</text>
+                        
+                        <!-- Reactant baseline at 0 kcal/mol -->
+                        <line x1="150" y1="480" x2="250" y2="480" stroke="#2d3748" stroke-width="4"/>
+                        
+                        <!-- Inversion pathway (green) - 28.69 kcal/mol barrier -->
+                        <line x1="250" y1="480" x2="450" y2="273" stroke="#48bb78" stroke-width="3"/>
+                        <line x1="450" y1="273" x2="550" y2="273" stroke="#48bb78" stroke-width="3"/>
+                        <line x1="550" y1="273" x2="750" y2="434" stroke="#48bb78" stroke-width="3"/>
+                        
+                        <!-- Rotation pathway (red, dashed) - 37.45 kcal/mol barrier -->
+                        <line x1="250" y1="480" x2="450" y2="225" stroke="#f56565" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+                        <line x1="450" y1="225" x2="550" y2="225" stroke="#f56565" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+                        <line x1="550" y1="225" x2="750" y2="434" stroke="#f56565" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+                        
+                        <!-- Product baseline at 7.60 kcal/mol -->
+                        <line x1="750" y1="434" x2="850" y2="434" stroke="#2d3748" stroke-width="4"/>
+                    </svg>
                 </div>
                 
                 <div class="footer-info">
-                    <p><strong>Key Finding:</strong> Fastest isomerization with t₁/₂ = <span class="key-point" style="background: #ed8936;">3.4 seconds</span>. Most kinetically labile system.</p>
+                    <p><strong>Key Finding:</strong> Fastest isomerization with t<span class="subscript">1/2</span> = <span class="key-point" style="background: #ed8936;">3.4 seconds</span>. Most kinetically labile system.</p>
                 </div>
             </div>
         </div>
@@ -868,12 +867,12 @@
                             <tr>
                                 <th>Compound</th>
                                 <th>Direction</th>
-                                <th>t₁/₂</th>
+                                <th>t<span class="subscript">1/2</span></th>
                                 <th>Reactant</th>
-                                <th>ΔG‡ (Inversion)</th>
-                                <th>ΔG‡ (Rotation)</th>
+                                <th>ΔG<span class="superscript">‡</span> (Inversion)</th>
+                                <th>ΔG<span class="superscript">‡</span> (Rotation)</th>
                                 <th>Product</th>
-                                <th>ΔG‡ (Exp)</th>
+                                <th>ΔG<span class="superscript">‡</span> (Exp)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -920,13 +919,13 @@
                         </tbody>
                     </table>
                     
-                    <div style="margin-top: 30px; padding: 20px; background: #f7fafc; border-radius: 10px;">
-                        <h3 style="color: #2d3748; margin-bottom: 15px;">Key Conclusions:</h3>
+                    <div style="margin-top: 20px; padding: 15px; background: #f7fafc; border-radius: 10px;">
+                        <h3 style="color: #2d3748; margin-bottom: 10px;">Key Conclusions:</h3>
                         <ul style="list-style: none; padding: 0;">
-                            <li style="margin: 10px 0;">✓ All compounds proceed via <strong>inversion mechanism</strong></li>
-                            <li style="margin: 10px 0;">✓ Rotation barriers are consistently <strong>11-25 kcal/mol higher</strong></li>
-                            <li style="margin: 10px 0;">✓ Calculated barriers match experimental values within <strong>±4 kcal/mol</strong></li>
-                            <li style="margin: 10px 0;">✓ Half-lives span <strong>8 orders of magnitude</strong> (3.4 s to 106.6 years)</li>
+                            <li style="margin: 8px 0;">✓ All compounds proceed via <strong>inversion mechanism</strong></li>
+                            <li style="margin: 8px 0;">✓ Rotation barriers are consistently <strong>11-25 kcal/mol higher</strong></li>
+                            <li style="margin: 8px 0;">✓ Calculated barriers match experimental values within <strong>±4 kcal/mol</strong></li>
+                            <li style="margin: 8px 0;">✓ Half-lives span <strong>8 orders of magnitude</strong> (3.4 s to 106.6 years)</li>
                         </ul>
                     </div>
                 </div>
@@ -992,12 +991,26 @@
             showSlide(currentSlide);
         }
         
+        function toggleFullscreen() {
+            const container = document.getElementById('presentationContainer');
+            if (!document.fullscreenElement) {
+                container.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+                container.classList.add('fullscreen');
+            } else {
+                document.exitFullscreen();
+                container.classList.remove('fullscreen');
+            }
+        }
+        
         // Keyboard navigation
         document.addEventListener('keydown', function(event) {
             if (event.key === 'ArrowLeft') changeSlide(-1);
             if (event.key === 'ArrowRight') changeSlide(1);
             if (event.key === 'Home') goToSlide(0);
             if (event.key === 'End') goToSlide(totalSlides - 1);
+            if (event.key === 'f' || event.key === 'F') toggleFullscreen();
         });
         
         // Initialize
