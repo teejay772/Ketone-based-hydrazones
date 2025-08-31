@@ -483,6 +483,18 @@
             font-size: 0.7em;
             vertical-align: super;
         }
+        
+        /* Update notice */
+        .update-notice {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            color: #92400e;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
@@ -530,20 +542,20 @@
                     <div class="structure-box stable-isomer" style="right: 23%; top: 51%; border-color: #48bb78;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s1E.jpg" class="structure-img" alt="1E">
                         <div class="structure-label">1E</div>
-                        <div class="energy-value">-0.63 kcal/mol</div>
+                        <div class="energy-value">-0.6 kcal/mol</div>
                     </div>
                     
                     <!-- TS structures positioned to the side with arrows -->
                     <div class="structure-box ts-inv" style="left: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/1-in-ts.jpg" class="structure-img" alt="1-inv-ts">
                         <div class="structure-label">TS-Inv</div>
-                        <div class="energy-value">30.44 kcal/mol</div>
+                        <div class="energy-value">30.4 kcal/mol</div>
                     </div>
                     
                     <div class="structure-box ts-rot" style="right: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/1-rot-ts.jpg" class="structure-img" alt="1-rot-ts">
                         <div class="structure-label">TS-Rot</div>
-                        <div class="energy-value">51.16 kcal/mol</div>
+                        <div class="energy-value">51.2 kcal/mol</div>
                     </div>
                     
                     <svg width="100%" height="100%" viewBox="0 0 1000 600" style="position: absolute; top: 0; left: 0;">
@@ -611,7 +623,7 @@
             </div>
         </div>
         
-        <!-- Slide 2 - Compound 2 -->
+        <!-- Slide 2 - Compound 2 (CORRECTED) -->
         <div class="slide slide2" id="slide2">
             <div class="slide-container">
                 <div class="slide-header" style="color: #4299e1;">
@@ -631,20 +643,20 @@
                     <div class="structure-box stable-isomer" style="right: 23%; top: 53%; border-color: #4299e1;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s2E.jpg" class="structure-img" alt="2E">
                         <div class="structure-label">2E</div>
-                        <div class="energy-value">-4.33 kcal/mol</div>
+                        <div class="energy-value">-4.3 kcal/mol</div>
                     </div>
                     
                     <!-- TS structures positioned to the side with arrows -->
                     <div class="structure-box ts-inv" style="left: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/2-in-ts.jpg" class="structure-img" alt="2-inv-ts">
                         <div class="structure-label">TS-Inv</div>
-                        <div class="energy-value">29.77 kcal/mol</div>
+                        <div class="energy-value">28.1 kcal/mol</div>
                     </div>
                     
                     <div class="structure-box ts-rot" style="right: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/2-rot-ts.jpg" class="structure-img" alt="2-rot-ts">
                         <div class="structure-label">TS-Rot</div>
-                        <div class="energy-value">55.08 kcal/mol</div>
+                        <div class="energy-value">55.1 kcal/mol</div>
                     </div>
                     
                     <svg width="100%" height="100%" viewBox="0 0 1000 600" style="position: absolute; top: 0; left: 0;">
@@ -659,10 +671,10 @@
                         </defs>
                         
                         <!-- Arrow from Inv TS to peak -->
-                        <path d="M 400 100 Q 420 220 440 279" stroke="#48bb78" stroke-width="2" fill="none" marker-end="url(#arrowhead3)"/>
+                        <path d="M 400 100 Q 420 220 440 288" stroke="#48bb78" stroke-width="2" fill="none" marker-end="url(#arrowhead3)"/>
                         
                         <!-- Arrow from Rot TS to peak -->
-                        <path d="M 600 100 Q 580 160 560 185" stroke="#f56565" stroke-width="2" fill="none" marker-end="url(#arrowhead4)"/>
+                        <path d="M 600 100 Q 580 160 560 149" stroke="#f56565" stroke-width="2" fill="none" marker-end="url(#arrowhead4)"/>
                         
                         <!-- Energy profile with 1.5x bigger y-axis spacing -->
                         <!-- Grid lines -->
@@ -691,10 +703,10 @@
                         <!-- Reactant baseline at 0 kcal/mol -->
                         <line x1="150" y1="480" x2="250" y2="480" stroke="#2d3748" stroke-width="4"/>
                         
-                        <!-- Inversion pathway (green) - 29.77 kcal/mol barrier -->
-                        <line x1="250" y1="480" x2="450" y2="279" stroke="#48bb78" stroke-width="3"/>
-                        <line x1="450" y1="279" x2="550" y2="279" stroke="#48bb78" stroke-width="3"/>
-                        <line x1="550" y1="279" x2="750" y2="506" stroke="#48bb78" stroke-width="3"/>
+                        <!-- Inversion pathway (green) - 28.1 kcal/mol barrier (CORRECTED) -->
+                        <line x1="250" y1="480" x2="450" y2="288" stroke="#48bb78" stroke-width="3"/>
+                        <line x1="450" y1="288" x2="550" y2="288" stroke="#48bb78" stroke-width="3"/>
+                        <line x1="550" y1="288" x2="750" y2="506" stroke="#48bb78" stroke-width="3"/>
                         
                         <!-- Rotation pathway (red, dashed) - 55.08 kcal/mol barrier -->
                         <line x1="250" y1="480" x2="450" y2="149" stroke="#f56565" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
@@ -732,20 +744,20 @@
                     <div class="structure-box stable-isomer" style="right: 23%; top: 57%; border-color: #9f7aea;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s5Z.jpg" class="structure-img" alt="5Z">
                         <div class="structure-label">5Z</div>
-                        <div class="energy-value">-9.82 kcal/mol</div>
+                        <div class="energy-value">-9.8 kcal/mol</div>
                     </div>
                     
                     <!-- TS structures positioned to the side with arrows -->
                     <div class="structure-box ts-inv" style="left: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/5-in-ts.jpg" class="structure-img" alt="5-inv-ts">
                         <div class="structure-label">TS-Inv</div>
-                        <div class="energy-value">24.50 kcal/mol</div>
+                        <div class="energy-value">24.5 kcal/mol</div>
                     </div>
                     
                     <div class="structure-box ts-rot" style="right: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/5-rot-ts.jpg" class="structure-img" alt="5-rot-ts">
                         <div class="structure-label">TS-Rot</div>
-                        <div class="energy-value">36.27 kcal/mol</div>
+                        <div class="energy-value">36.3 kcal/mol</div>
                     </div>
                     
                     <svg width="100%" height="100%" viewBox="0 0 1000 600" style="position: absolute; top: 0; left: 0;">
@@ -833,20 +845,20 @@
                     <div class="structure-box stable-isomer" style="right: 23%; top: 55%; border-color: #ed8936;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/s6Z.jpg" class="structure-img" alt="6Z">
                         <div class="structure-label">6Z</div>
-                        <div class="energy-value">-7.74 kcal/mol</div>
+                        <div class="energy-value">-7.7 kcal/mol</div>
                     </div>
                     
                     <!-- TS structures positioned to the side with arrows -->
                     <div class="structure-box ts-inv" style="left: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/6-in-ts.jpg" class="structure-img" alt="6-inv-ts">
                         <div class="structure-label">TS-Inv</div>
-                        <div class="energy-value">28.69 kcal/mol</div>
+                        <div class="energy-value">28.7 kcal/mol</div>
                     </div>
                     
                     <div class="structure-box ts-rot" style="right: 35%; top: 5%;">
                         <img src="https://raw.githubusercontent.com/teejay772/Ketone-based-hydrazones/main/6-rot-ts.jpg" class="structure-img" alt="6-rot-ts">
                         <div class="structure-label">TS-Rot</div>
-                        <div class="energy-value">37.45 kcal/mol</div>
+                        <div class="energy-value">37.5 kcal/mol</div>
                     </div>
                     
                     <svg width="100%" height="100%" viewBox="0 0 1000 600" style="position: absolute; top: 0; left: 0;">
@@ -914,7 +926,7 @@
             </div>
         </div>
         
-        <!-- Summary Slide -->
+        <!-- Summary Slide (CORRECTED) -->
         <div class="slide summary-slide" id="slide5">
             <div class="slide-container">
                 <h2 class="summary-title">Summary: Comparative Analysis</h2>
@@ -939,9 +951,9 @@
                                 <td>Z→E</td>
                                 <td><strong>106.6 years</strong></td>
                                 <td>0.0 (Z)</td>
-                                <td class="energy-inv">30.44</td>
-                                <td class="energy-rot">51.16</td>
-                                <td>-0.63 (E)</td>
+                                <td class="energy-inv">30.4</td>
+                                <td class="energy-rot">51.2</td>
+                                <td>-0.6 (E)</td>
                                 <td class="energy-exp">30.7</td>
                             </tr>
                             <tr>
@@ -949,9 +961,9 @@
                                 <td>Z→E</td>
                                 <td>33.2 hours</td>
                                 <td>0.0 (Z)</td>
-                                <td class="energy-inv">29.77</td>
-                                <td class="energy-rot">55.08</td>
-                                <td>-4.33 (E)</td>
+                                <td class="energy-inv">28.1</td>
+                                <td class="energy-rot">55.1</td>
+                                <td>-4.3 (E)</td>
                                 <td class="energy-exp">25.4</td>
                             </tr>
                             <tr>
@@ -959,9 +971,9 @@
                                 <td>E→Z</td>
                                 <td>59.5 s</td>
                                 <td>0.0 (E)</td>
-                                <td class="energy-inv">24.50</td>
-                                <td class="energy-rot">36.27</td>
-                                <td>-9.82 (Z)</td>
+                                <td class="energy-inv">24.5</td>
+                                <td class="energy-rot">36.3</td>
+                                <td>-9.8 (Z)</td>
                                 <td class="energy-exp">21.0</td>
                             </tr>
                             <tr>
@@ -969,9 +981,9 @@
                                 <td>E→Z</td>
                                 <td><strong>3.4 s</strong></td>
                                 <td>0.0 (E)</td>
-                                <td class="energy-inv">28.69</td>
-                                <td class="energy-rot">37.45</td>
-                                <td>-7.74 (Z)</td>
+                                <td class="energy-inv">28.7</td>
+                                <td class="energy-rot">37.5</td>
+                                <td>-7.7 (Z)</td>
                                 <td class="energy-exp">19.3</td>
                             </tr>
                         </tbody>
